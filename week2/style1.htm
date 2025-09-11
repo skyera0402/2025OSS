@@ -6,7 +6,6 @@
 </head>
 <body>
   <style>
-    /* 전체 기본 */
     body{
         margin:0;
         font-family:Arial,Helvetica,sans-serif;
@@ -18,8 +17,6 @@
         color:#0645ad;
         text-decoration:underline
     }
-
-    /* 상단 녹색 헤더 (제목+부제) */
     .hero{
         background:#2E8B57;
         color:#fff;
@@ -35,8 +32,6 @@
         margin:6px 0 0;
         opacity:.95
     }
-
-    /* 레이아웃 컨테이너 */
     .wrap{
         max-width:1100px;
         margin:0 auto;
@@ -48,8 +43,6 @@
         gap:20px;margin-top:12px
     }
     @media (max-width: 980px){.grid{grid-template-columns:1fr}.right{order:3}}
-
-    /* 좌측 메뉴 */
     .menu{
         background:#f0f6f2;
         border:1px solid #d9e6dc;
@@ -75,8 +68,6 @@
         border-color:#2E8B57;
         font-weight:700
     }
-
-    /* 본문 */
     main{
         padding:4px 0
     }
@@ -93,8 +84,6 @@
     main p,main ul,main div{
         max-width:740px
     }
-
-    /* 우측 파란 사이드바 */
     .right{
         align-self:start
     }
@@ -113,8 +102,6 @@
     .sidebox p{
         margin:0
     }
-
-    /* 하단 회색 알림 박스 */
     .notice{
         background:#efefef;
         border:1px solid #ddd;
@@ -123,8 +110,6 @@
         margin-top:14px
     }
   </style>
-
-  <!-- 상단 헤더 -->
   <div class="hero">
     <h1>Welcome to My Homepage</h1>
     <p>Use the menu to select different Stylesheets</p>
@@ -132,7 +117,7 @@
 
   <div class="wrap">
     <div class="grid">
-      <!-- 좌측 메뉴 -->
+
       <aside class="menu">
         <a class="active" href="style1.html">Stylesheet 1</a>
         <a href="style2.html">Stylesheet 2</a>
@@ -141,7 +126,7 @@
         <a href="index.html">No Stylesheet</a>
       </aside>
 
-      <!-- 본문(원문 유지) -->
+
       <main>
         <h1>Same Page Different Stylesheets</h1>
 
@@ -173,7 +158,7 @@
         </div>
       </main>
 
-      <!-- 우측 사이드바 -->
+
       <aside class="right">
         <div class="sidebox">
           <h3>Side-Bar</h3>
