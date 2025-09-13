@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 샘플 페이지</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-code me-2"></i>Bootstrap Sample
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">홈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">소개</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">서비스</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">연락처</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section id="home" class="bg-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-3">Bootstrap 샘플 페이지에 오신 것을 환영합니다!</h1>
+                    <p class="lead mb-4">현대적이고 반응형 웹사이트를 쉽게 만들 수 있는 Bootstrap 프레임워크를 사용한 샘플 페이지입니다.</p>
+                    <button class="btn btn-light btn-lg me-3">시작하기</button>
+                    <button class="btn btn-outline-light btn-lg">더 알아보기</button>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-laptop-code fa-10x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 소개 섹션 -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-4">우리에 대해</h2>
+                    <p class="lead mb-5">Bootstrap을 사용하여 빠르고 효율적으로 웹사이트를 개발하는 방법을 보여드립니다. 반응형 디자인과 모던한 UI 컴포넌트들을 활용해보세요.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">반응형 디자인</h5>
+                            <p class="card-text">모든 디바이스에서 완벽하게 작동하는 반응형 웹사이트를 만들 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-rocket fa-3x text-success mb-3"></i>
+                            <h5 class="card-title">빠른 개발</h5>
+                            <p class="card-text">미리 만들어진 컴포넌트들을 사용하여 개발 시간을 크게 단축할 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-palette fa-3x text-warning mb-3"></i>
+                            <h5 class="card-title">커스터마이징</h5>
+                            <p class="card-text">다양한 테마와 색상을 사용하여 브랜드에 맞는 디자인을 만들 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 서비스 섹션 -->
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="mb-4">우리의 서비스</h2>
+                    <p class="lead">다양한 웹 개발 서비스를 제공합니다</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-code fa-2x text-primary"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5>웹 개발</h5>
+                            <p>최신 기술을 사용한 현대적인 웹사이트 개발 서비스를 제공합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-paint-brush fa-2x text-success"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5>UI/UX 디자인</h5>
+                            <p>사용자 경험을 최우선으로 하는 직관적인 인터페이스를 디자인합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-search fa-2x text-warning"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5>SEO 최적화</h5>
+                            <p>검색엔진에 친화적인 웹사이트로 더 많은 방문자를 유치합니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-shield-alt fa-2x text-danger"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5>보안 강화</h5>
+                            <p>웹사이트의 보안을 강화하여 안전한 서비스를 제공합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 연락처 섹션 -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="mb-4">연락처</h2>
+                    <p class="lead">궁금한 점이 있으시면 언제든지 연락해주세요</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="row g-4">
+                        <div class="col-md-4 text-center">
+                            <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                            <h6>이메일</h6>
+                            <p>contact@example.com</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="fas fa-phone fa-2x text-primary mb-3"></i>
+                            <h6>전화번호</h6>
+                            <p>02-1234-5678</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="fas fa-map-marker-alt fa-2x text-primary mb-3"></i>
+                            <h6>주소</h6>
+                            <p>서울특별시 강남구</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Bootstrap Sample. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- 간단한 스크롤 효과 -->
+    <script>
+        // 네비게이션 링크 클릭 시 스무스 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 스크롤 시 네비게이션 바 배경 변경
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('shadow');
+            } else {
+                navbar.classList.remove('shadow');
+            }
+        });
+    </script>
+</body>
+</html>
