@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="example_1" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    form span{
+        color:red
+    }
+</style>
+<body>
+    
+    <form method="POST" action="form_HJS.html">
+
+        <label for="input_name"><span style="color:red">*</span>이름 : </label>
+        <input type="text" id="input_name" name="name"/><br/>
+        
+        <label for="input_password"><span>*</span>비밀번호 : </label>
+        <input type="text" id="input_password" name="password" placeholder="4자리 이상 입력"/> <br/>
+
+        <label for="input_phonenumber">전화번호 : </label>
+        <input type="text" id="input_phonenumber" name="phonenumber"/><br/>
+
+        <div>
+            <label for="input_radio">성별 : </label>
+            <input type="radio" name="input_radio" id="input_radio1"/>남
+            <input type="radio" name="input_radio" id="input_radio1"/>여
+        </div>
+
+        <div>
+            <label for="input_type_checkbox">취미</label>
+            <input type="checkbox" name="input_checkbox3" id="input_type_checkbox_3" checked  value="1"/>영화감상
+            <input type="checkbox" name="input_checkbox3" id="input_type_checkbox_3" value="2"/>독서
+            <input type="checkbox" name="input_checkbox3" id="input_type_checkbox_3" value="3"/>스포츠
+        </div>
+
+
+        <input type="submit" value="저장"/> 
+        <input type="reset" value="새로입력" />
+    </form>
+
+</body>
+</html>

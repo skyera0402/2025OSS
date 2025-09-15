@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="week3_1" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>HTML Forms</h2>
+    <div>사용자 정보 입력</div>
+    <form method="POST" action="form_ok.html"></form>
+        <!-- 
+            method는 데이터를 전송할 때 방식 GET, POST, PUT, DELETE 등등...
+            action은 데이터를 전송할 url을 표기!
+         -->
+        <label for="inut_name">이름 : </label> <br/>
+        <input type="text" id="input_name" name="name" placeholder="이름을 입력" /><br />
+        
+         <!-- 
+            label은 인풋 태그 이름을 표기하는 공간
+            placeholder를 적어주면, 아무것도 입력하지 않았을 때 인풋 내에 표기가 된다.
+            input의 name을 어트리뷰트는 폼으로 전송할 떄 key 값으로 작용합니다!
+          -->
+
+        <label for="input_email">이메일 : </label></body> <br/>
+        <input type="text" id="input_email" name="email" placeholder="이메일을 입력"/> <br/>
+
+        <fieldset>
+            <legend>필드셋의 라벨 같은 기능!</legend>
+            <label for="input_phone">전화번호 : </label><input type="text" id="input_phone" name="phone" /> <br/>
+            <label for="input_address">주소 : </label><input type="text" id="input_address" name="address" />
+        </fieldset>
+
+        <div>
+            <label for="input_type_text">TYPE : text</label>
+            <input type="name" name="input_text" id="input_type_text"/> 
+        </div>
+        <div>
+            <label for="input_type_password">TYPE : password</label>
+            <input type="name" name="input_password" id="input_type_password"/> 
+        </div>
+        <div>
+            <label for="input_type_number">TYPE : number</label>
+            <input type="name" name="input_number" id="input_type_number"/> 
+        </div>
+        <div>
+            <label for="input_type_text">TYPE : date</label>
+            <input type="date" name="input_date" id="input_type_date"/> 
+        </div>
+        <div>
+            <label for="input_type_time">TYPE : time</label>
+            <input type="submit" name="input_time" id="input_type_time"/> 
+        </div>
+        <div>
+            <label for="input_type_text">TYPE : hidden</label>
+            <input type="hidden" name="input_hidden" id="input_type_hidden"/>
+            <input type="text" name="input_hidden1" id="input_type_hidden1" style="display: block;"/> 
+        </div>
+
+        <div>
+            <label for="input_type_color">TYPE : color</label>
+            <input type="color" name="input_color" id="input_type_color"/> 
+        </div>
+
+        <div>
+            <label for="input_type_radio_1">TYPE : radio 1</label>
+            <input type="radio" name="input_radio" id="input_type_radio_1" />
+        </div>
+        <div>
+            <label for="input_type_radio_2">TYPE : radio 2</label>
+            <input type="radio" name="input_radio" id="input_type_radio_2" />
+        </div>
+        <div>
+            <label for="input_type_radio_3">TYPE : radio 3</label>
+            <input type="radio" name="input_radio" id="input_type_radio_3" />
+        </div>
+
+
+        <div>
+            <label for="input_type_checkbox_1">TYPE : checkbox 1</label>
+            <input type="checkbox" name="input_checkbox1" id="input_type_checkbox_1" />
+        </div>
+        <div>
+            <label for="input_type_checkbox_2">TYPE : checkbox 2</label>
+            <input type="checkbox" name="input_checkbox2" id="input_type_checkbox_2" />
+        </div> 
+        <div>
+            <label for="input_type_checkbox_3">TYPE : checkbox 3</label>
+            <input type="checkbox" name="input_checkbox3" id="input_type_checkbox_3" />
+        </div>
+
+
+        <div>
+            <label for="input_type_file">TYPE : file</label>
+            <input type="file" name="input_file" id="input_type_file" />
+        </div>
+
+        <div>
+            <label for="select_gender">TYPE : gender</label>
+            <select name="gender" id="select_gender">
+                <optgroup label="그룹1">
+                    <option value="M">남</option>
+                    <option value="F">여</option>
+                </optgroup>
+
+                <optgroup label="그룹2">
+                    <option value="X">선택</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div>
+            <label for="input_type_list">TYPE : list</label>
+            <input type="text" list="list_fruit" name="input_list" id="input_type_list"/>
+            <datalist id="list_fruit">
+                <option value="apple">사과</option>
+                <option value="orange">오렌지</option>
+            </datalist>
+        </div>
+
+        <div>
+            <label for="input_type_textarea">TYPE : </label>
+            <textarea id="input_type_textarea" row=""></textarea>
+        </div>
+
+
+        <input type="submit" value="제출"/> 
+        <input type="reset" value="취소" />
+
+
+
+</body>
+</html>
