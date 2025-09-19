@@ -7,8 +7,9 @@
 
   <style>
     * { box-sizing: border-box; }
+    /* 레이아웃 너비 구분을 위해서 사용 좌측 : 우측 = 3 : 1, 가운데 50% */
     .row {
-         display: flex;
+        display: flex;
         flex-wrap: wrap; 
         margin: 0 -8px; 
     }
@@ -79,9 +80,7 @@
         border-radius: 4px; 
         border:1px solid #ccc; 
     }
-    @media (max-width: 900px) {
-      .col-75, .col-50, .col-25 { flex: 0 0 100%; }
-    }
+
   </style>
 </head>
 <body>

@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Checkout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    * { box-sizing: border-box; }
+    /* 레이아웃 너비 구분을 위해서 사용 좌측 : 우측 = 3 : 1, 가운데 50% */
+    .row {
+        display: flex;
+        flex-wrap: wrap; 
+        margin: 0 -8px; 
+    }
+    .leftSide { 
+        flex: 0 0 75%; 
+        padding: 0 8px; 
+    }
+
+    .centerArea { 
+        flex: 0 0 50%;
+        padding: 0 8px; 
+    }
+
+    .rightSide { 
+        flex: 0 0 25%; 
+        padding: 0 8px; 
+    }
+
+    .container { 
+        background: #f2f2f2; 
+        padding: 16px; 
+        border-radius: 8px; 
+    }
+    input[type=text], input[type=email], input[type=date], input[type=color], select, textarea {
+      width: 100%; 
+      padding: 12px; 
+      border: 1px solid #ccc; 
+      border-radius: 4px; 
+      margin: 6px 0 16px;
+    }
+    textarea { 
+        resize: vertical; 
+    }
+    .btn { 
+        background-color: #04AA6D; 
+        color: white; 
+        padding: 12px; 
+        border: none; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        width: 100%; 
+    }
+    .btn:hover { 
+        background-color: #03945f; 
+    }
+    fieldset { 
+        border: 1px solid #ddd; 
+        padding: 12px; 
+        border-radius: 6px; 
+        margin-bottom: 16px; 
+    }
+    legend { 
+        padding: 0 6px; 
+        font-weight: 600; 
+    }
+    label { 
+        display:block; 
+        font-weight:600; 
+    }
+    .color-row { 
+        display:flex; 
+        align-items:center; 
+        gap:12px; 
+    }
+    .color-preview { 
+        width: 24px; 
+        height: 24px; 
+        border-radius: 4px; 
+        border:1px solid #ccc; 
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="row">
+  <div class="leftSide">
+    <div class="container">
+      <form action="/action_page.php" method="post" novalidate>
+
+        <div class="row">
+          <div class="centerArea">
+            <h3>Billing Address</h3>
+
+            <label for="fname">Full Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="Skyera" required
+                   pattern="^[A-Za-z][A-Za-z .'-]{1,}$"
+                   title="Use letters, spaces, and . ' - (at least 2 characters)">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="sumiskyera@handong.ac.kr" required
+                   autocomplete="email">
+
+            <label for="adr">Address</label>
+            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required
+                   autocomplete="address-line1">
+
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" placeholder="New York" list="city-list" required
+                   pattern="^[A-Za-z ]{2,}$" title="Use letters and spaces only (min 2 chars)">
+            <datalist id="city-list">
+              <option value="New York"></option>
+              <option value="Los Angeles"></option>
+              <option value="Chicago"></option>
+              <option value="Houston"></option>
+            </datalist>
+
+            <div class="row">
+              <div class="centerArea">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="NY" required
+                       pattern="^[A-Za-z]{2}$" title="2-letter code (e.g., NY)">
+              </div>
+              <div class="centerArea">
+                <label for="zip">Zip</label>
+                <input type="text" id="zip" name="zip" placeholder="10001" required
+                       inputmode="numeric"
+                       pattern="^\d{5}(-\d{4})?$"
+                       title="5 digits or ZIP+4 (e.g., 10001 or 10001-1234)">
+              </div>
+            </div>
+
+            <label for="delivery-date">Delivery Date</label>
+            <input type="date" id="delivery-date" name="delivery_date" required>
+
+            <label for="order-notes">Order Notes</label>
+            <textarea id="order-notes" name="order_notes" rows="3" placeholder="Any special instructions (optional)"></textarea>
+          </div>
+
+          <div class="centerArea">
+            <h3>Payment</h3>
+
+            <fieldset>
+              <legend>Payment Method</legend>
+              <label><input type="radio" name="paymethod" value="credit" checked> Credit Card</label>
+              <label><input type="radio" name="paymethod" value="debit"> Debit Card</label>
+              <label><input type="radio" name="paymethod" value="paypal"> PayPal</label>
+            </fieldset>
+
+            <label for="card-color">Card Accent Color</label>
+            <div class="color-row">
+              <input type="color" id="card-color" name="card_color" value="#1a73e8">
+              <span class="color-preview" id="color-preview" style="background:#1a73e8;"></span>
+            </div>
+
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="Skyera" required
+                   pattern="^[A-Za-z][A-Za-z .'-]{1,}$"
+                   title="Use letters, spaces, and . ' - (at least 2 characters)"
+                   autocomplete="cc-name">
+
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required
+                   inputmode="numeric" autocomplete="cc-number"
+                   pattern="^(\d{4}[- ]?){3}\d{4}$"
+                   title="Enter 16 digits, optionally grouped as 1111-2222-3333-4444">
+
+            <label for="expmonth-select">Exp Month</label>
+            <select id="expmonth-select" name="expmonth" required autocomplete="cc-exp-month">
+              <option value="">Choose...</option>
+              <optgroup label="Q1">
+                <option>January</option><option>February</option><option>March</option>
+              </optgroup>
+              <optgroup label="Q2">
+                <option>April</option><option>May</option><option>June</option>
+              </optgroup>
+              <optgroup label="Q3">
+                <option>July</option><option>August</option><option>September</option>
+              </optgroup>
+              <optgroup label="Q4">
+                <option>October</option><option>November</option><option>December</option>
+              </optgroup>
+            </select>
+
+            <div class="row">
+              <div class="centerArea">
+                <label for="expyear">Exp Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2027" required
+                       inputmode="numeric" autocomplete="cc-exp-year"
+                       pattern="^20(2[5-9]|3[0-5])$"
+                       title="Enter a year from 2025 to 2035">
+              </div>
+              <div class="centerArea">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="352" required
+                       inputmode="numeric" autocomplete="cc-csc"
+                       pattern="^\d{3,4}$" title="3 or 4 digits">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <label>
+          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+        </label>
+
+        <input type="submit" value="Continue to checkout" class="btn">
+      </form>
+    </div>
+  </div>
+
+  <div class="rightSide">
+    <div class="container">
+      <h4>Cart
+        <span class="price" style="color:black">
+          <b>4</b>
+        </span>
+      </h4>
+      <p><a href="#">Product 1</a> <span class="price">$15</span></p>
+      <p><a href="#">Product 2</a> <span class="price">$5</span></p>
+      <p><a href="#">Product 3</a> <span class="price">$8</span></p>
+      <p><a href="#">Product 4</a> <span class="price">$2</span></p>
+      <hr>
+      <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  function showTooltip(target, text) {
+    let tip = document.createElement('div');
+    tip.className = '__tooltip';
+    tip.textContent = text;
+    Object.assign(tip.style, {
+      position: 'absolute',
+      zIndex: 9999,
+      padding: '6px 8px',
+      background: '#333',
+      color: '#fff',
+      borderRadius: '4px',
+      fontSize: '12px',
+      whiteSpace: 'nowrap',
+      boxShadow: '0 2px 8px rgba(0,0,0,.2)',
+      transform: 'translate(-50%, -120%)'
+    });
+
+    const rect = target.getBoundingClientRect();
+    tip.style.left = rect.left + rect.width / 2 + window.scrollX + 'px';
+    tip.style.top = rect.top + window.scrollY + 'px';
+    document.body.appendChild(tip);
+    target.__tooltipEl = tip;
+  }
+
+  function hideTooltip(target) {
+    const tip = target.__tooltipEl;
+    if (tip && tip.parentNode) tip.parentNode.removeChild(tip);
+    target.__tooltipEl = null;
+  }
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const submitBtn = document.querySelector('input[type="submit"].btn');
+
+    const deliveryDate = document.getElementById('delivery-date');       
+    const expMonthSelect = document.getElementById('expmonth-select');   
+    const colorPicker = document.getElementById('card-color');          
+    const colorPreview = document.getElementById('color-preview');
+
+    const zipInput = document.getElementById('zip');                     
+    const ccNumInput = document.getElementById('ccnum');                
+    const cvvInput = document.getElementById('cvv');                     
+
+
+    if (deliveryDate) {
+      deliveryDate.addEventListener('change', () => {
+        if (deliveryDate.value) {
+          alert(`Delivery date set to: ${deliveryDate.value}`);
+        }
+      });
+    }
+
+    if (colorPicker && colorPreview) {
+      colorPicker.addEventListener('change', (event) => {
+        colorPreview.style.background = event.target.value;
+        alert(`Card accent color: ${event.target.value}`);
+      });
+      colorPicker.addEventListener('input', (event) => {
+        colorPreview.style.background = event.target.value;
+      });
+    }
+
+    if (expMonthSelect) {
+      expMonthSelect.addEventListener('change', () => {
+        if (expMonthSelect.value) {
+          alert(`Expiration month: ${expMonthSelect.value}`);
+        }
+      });
+    }
+
+    if (submitBtn && form) {
+      submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const ok = confirm('Proceed to checkout?');
+        if (ok) {
+          alert('Order submitted! (demo)');
+        } else {
+          alert('Checkout cancelled.');
+        }
+      });
+    }
+
+    if (submitBtn) {
+      submitBtn.addEventListener('mouseover', () => {
+        submitBtn.style.boxShadow = '0 6px 14px rgba(0,0,0,0.18)';
+        submitBtn.style.transform = 'translateY(-1px)';
+        showTooltip(submitBtn, 'Click to place your order');
+      });
+      submitBtn.addEventListener('mouseout', () => {
+        submitBtn.style.boxShadow = 'none';
+        submitBtn.style.transform = 'none';
+        hideTooltip(submitBtn);
+      });
+    }
+
+    function isControlKey(evt) {
+      const code = evt.key;
+      return (
+        code === 'Backspace' || code === 'Delete' || code === 'Tab' ||
+        code === 'ArrowLeft' || code === 'ArrowRight' || code === 'ArrowUp' || code === 'ArrowDown' ||
+        evt.ctrlKey || evt.metaKey
+      );
+    }
+
+    if (zipInput) {
+      zipInput.addEventListener('keydown', (evt) => {
+        if (isControlKey(evt)) return;
+        const allowed = /[0-9-]/.test(evt.key);
+        if (!allowed) evt.preventDefault();
+      });
+    }
+
+    if (ccNumInput) {
+      ccNumInput.addEventListener('keydown', (evt) => {
+        if (isControlKey(evt)) return;
+        const allowed = /[0-9\- ]/.test(evt.key);
+        if (!allowed) evt.preventDefault();
+      });
+    }
+
+    if (cvvInput) {
+      cvvInput.addEventListener('keydown', (evt) => {
+        if (isControlKey(evt)) return;
+        const allowed = /[0-9]/.test(evt.key);
+        if (!allowed) evt.preventDefault();
+      });
+    }
+
+    const leftSide = document.querySelector('.leftSide');
+    if (leftSide) {
+      leftSide.addEventListener('mouseover', () => {
+        leftSide.style.outline = '2px dashed #04AA6D';
+      });
+      leftSide.addEventListener('mouseout', () => {
+        leftSide.style.outline = 'none';
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

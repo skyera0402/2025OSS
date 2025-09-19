@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Checkout + Interactive + Summary List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    * { box-sizing: border-box; }
+    /* 레이아웃: 좌측:우측 = 3:1, 내부 50% 분할 */
+    .row { display:flex; flex-wrap:wrap; margin:0 -8px; }
+    .leftSide { 
+        flex:0 0 75%; 
+        padding:0 8px; 
+    }
+    .centerArea{ 
+        flex:0 0 50%; 
+        padding:0 8px; 
+    }
+    .rightSide { 
+        flex:0 0 25%; 
+        padding:0 8px; 
+    }
+
+    .container { 
+        background:#f2f2f2; 
+        padding:16px; 
+        border-radius:8px; 
+    }
+    input[type=text], input[type=email], input[type=date], input[type=color], select, textarea {
+      width:100%; 
+      padding:12px; 
+      border:1px solid #ccc; 
+      border-radius:4px; 
+      margin:6px 0 16px;
+    }
+    textarea { resize:vertical; }
+    .btn { 
+        background:#04AA6D; 
+        color:white; 
+        padding:12px; 
+        border:none; 
+        border-radius:4px; 
+        cursor:pointer; 
+        width:100%; 
+    }
+    .btn:hover { 
+        background:#03945f; 
+    }
+    fieldset { 
+        border:1px solid #ddd; 
+        padding:12px; 
+        border-radius:6px; 
+        margin-bottom:16px; 
+    }
+    legend {
+        padding:0 6px; 
+        font-weight:600; 
+    }
+    label { 
+        display:block; 
+        font-weight:600; 
+    }
+    .color-row { 
+        display:flex; 
+        align-items:center; 
+        gap:12px; 
+    }
+    .color-preview { 
+        width:24px; 
+        height:24px; 
+        border-radius:4px; 
+        border:1px solid #ccc; 
+    }
+    .dyn-actions { 
+        display:flex; 
+        gap:8px; 
+        flex-wrap:wrap; 
+        margin-bottom:12px; 
+    }
+    .dyn-actions .btn { 
+        width:auto; 
+        padding:10px 14px; 
+    }
+    .dyn-list { 
+        list-style:none; 
+        padding:0; 
+        margin:0; 
+    }
+    .dyn-list li {
+        background:#fff; 
+        border:1px solid #ddd;
+        border-radius:6px;
+        padding:10px 12px;
+        margin-bottom:8px; 
+        display:flex;
+        align-items:center; 
+        gap:8px;
+    }
+    .dyn-badge {
+      display:inline-block; 
+      min-width:22px; 
+      text-align:center;
+      background:#04AA6D; 
+      color:#fff; 
+      border-radius:12px; 
+      padding:2px 8px; 
+      font-size:12px;
+    }
+    .dyn-empty { 
+        color:#666; 
+        font-size:14px; 
+        margin-top:8px; 
+    }
+  </style>
+</head>
+<body>
+
+<div class="row">
+  <div class="leftSide">
+    <div class="container">
+      <form action="/action_page.php" method="post" novalidate>
+        <div class="row">
+
+          <div class="centerArea">
+            <h3>Billing Address</h3>
+
+            <label for="fname">Full Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="Skyera" required
+                   pattern="^[A-Za-z][A-Za-z .'-]{1,}$"
+                   title="Use letters, spaces, and . ' - (at least 2 characters)">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="sumiskyera@handong.ac.kr" required
+                   autocomplete="email">
+
+            <label for="adr">Address</label>
+            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required
+                   autocomplete="address-line1">
+
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" placeholder="New York" list="city-list" required
+                   pattern="^[A-Za-z ]{2,}$" title="Use letters and spaces only (min 2 chars)">
+            <datalist id="city-list">
+              <option value="New York"></option>
+              <option value="Los Angeles"></option>
+              <option value="Chicago"></option>
+              <option value="Houston"></option>
+            </datalist>
+
+            <div class="row">
+              <div class="centerArea">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="NY" required
+                       pattern="^[A-Za-z]{2}$" title="2-letter code (e.g., NY)">
+              </div>
+              <div class="centerArea">
+                <label for="zip">Zip</label>
+                <input type="text" id="zip" name="zip" placeholder="10001" required
+                       inputmode="numeric"
+                       pattern="^\d{5}(-\d{4})?$"
+                       title="5 digits or ZIP+4 (e.g., 10001 or 10001-1234)">
+              </div>
+            </div>
+
+            <label for="delivery-date">Delivery Date</label>
+            <input type="date" id="delivery-date" name="delivery_date" required>
+
+            <label for="order-notes">Order Notes</label>
+            <textarea id="order-notes" name="order_notes" rows="3" placeholder="Any special instructions (optional)"></textarea>
+          </div>
+
+
+          <div class="centerArea">
+            <h3>Payment</h3>
+
+            <fieldset>
+              <legend>Payment Method</legend>
+              <label><input type="radio" name="paymethod" value="Credit Card" checked> Credit Card</label>
+              <label><input type="radio" name="paymethod" value="Debit Card"> Debit Card</label>
+              <label><input type="radio" name="paymethod" value="PayPal"> PayPal</label>
+            </fieldset>
+
+            <label for="card-color">Card Accent Color</label>
+            <div class="color-row">
+              <input type="color" id="card-color" name="card_color" value="#1a73e8">
+              <span class="color-preview" id="color-preview" style="background:#1a73e8;"></span>
+            </div>
+
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="Skyera" required
+                   pattern="^[A-Za-z][A-Za-z .'-]{1,}$"
+                   title="Use letters, spaces, and . ' - (at least 2 characters)"
+                   autocomplete="cc-name">
+
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required
+                   inputmode="numeric" autocomplete="cc-number"
+                   pattern="^(\d{4}[- ]?){3}\d{4}$"
+                   title="Enter 16 digits, optionally grouped as 1111-2222-3333-4444">
+
+            <label for="expmonth-select">Exp Month</label>
+            <select id="expmonth-select" name="expmonth" required autocomplete="cc-exp-month">
+              <option value="">Choose...</option>
+              <optgroup label="Q1">
+                <option>January</option><option>February</option><option>March</option>
+              </optgroup>
+              <optgroup label="Q2">
+                <option>April</option><option>May</option><option>June</option>
+              </optgroup>
+              <optgroup label="Q3">
+                <option>July</option><option>August</option><option>September</option>
+              </optgroup>
+              <optgroup label="Q4">
+                <option>October</option><option>November</option><option>December</option>
+              </optgroup>
+            </select>
+
+            <div class="row">
+              <div class="centerArea">
+                <label for="expyear">Exp Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2027" required
+                       inputmode="numeric" autocomplete="cc-exp-year"
+                       pattern="^20(2[5-9]|3[0-5])$"
+                       title="Enter a year from 2025 to 2035">
+              </div>
+              <div class="centerArea">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="352" required
+                       inputmode="numeric" autocomplete="cc-csc"
+                       pattern="^\d{3,4}$" title="3 or 4 digits">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <label>
+          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+        </label>
+
+        <input type="submit" value="Continue to checkout" class="btn">
+      </form>
+    </div>
+  </div>
+
+
+  <div class="rightSide">
+    <div class="container">
+      <h4>Cart <span class="price" style="color:black"><b>4</b></span></h4>
+      <p><a href="#">Product 1</a> <span class="price">$15</span></p>
+      <p><a href="#">Product 2</a> <span class="price">$5</span></p>
+      <p><a href="#">Product 3</a> <span class="price">$8</span></p>
+      <p><a href="#">Product 4</a> <span class="price">$2</span></p>
+      <hr>
+      <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" style="margin:16px 8px;">
+  <h3>Save Important Info</h3>
+
+
+  <fieldset style="margin-bottom:12px;">
+    <legend>Fields to include</legend>
+    <label><input type="checkbox" class="info-field" value="fname" checked> Full Name</label>
+    <label><input type="checkbox" class="info-field" value="email" checked> Email</label>
+    <label><input type="checkbox" class="info-field" value="adr" checked> Address</label>
+    <label><input type="checkbox" class="info-field" value="city"> City</label>
+    <label><input type="checkbox" class="info-field" value="state"> State</label>
+    <label><input type="checkbox" class="info-field" value="zip"> Zip</label>
+    <label><input type="checkbox" class="info-field" value="delivery-date"> Delivery Date</label>
+    <label><input type="checkbox" class="info-field" value="paymethod"> Payment Method</label>
+  </fieldset>
+
+  <div class="dyn-actions">
+    <button type="button" id="btn-save-summary" class="btn">Add Summary</button>
+    <button type="button" id="btn-clear-summary" class="btn" style="background:#a94442;">Clear All</button>
+  </div>
+
+  <ul id="summary-list" class="dyn-list"></ul>
+  <div id="summary-empty" class="dyn-empty">아직 저장된 요약 정보가 없습니다.</div>
+</div>
+
+<script>
+
+  function showTooltip(target, text) {
+    let tip = document.createElement('div');
+    tip.className = '__tooltip';
+    tip.textContent = text;
+    Object.assign(tip.style, {
+      position:'absolute', zIndex:9999, padding:'6px 8px', background:'#333', color:'#fff',
+      borderRadius:'4px', fontSize:'12px', whiteSpace:'nowrap', boxShadow:'0 2px 8px rgba(0,0,0,.2)',
+      transform:'translate(-50%, -120%)'
+    });
+    const rect = target.getBoundingClientRect();
+    tip.style.left = rect.left + rect.width/2 + window.scrollX + 'px';
+    tip.style.top  = rect.top  + window.scrollY + 'px';
+    document.body.appendChild(tip);
+    target.__tooltipEl = tip;
+  }
+  function hideTooltip(target) {
+    const tip = target.__tooltipEl;
+    if (tip && tip.parentNode) tip.parentNode.removeChild(tip);
+    target.__tooltipEl = null;
+  }
+
+  window.onload = function() {
+    console.log('[window.onload] 모든 리소스 로드 완료');
+  };
+  document.onreadystatechange = function() {
+    console.log('[document.onreadystatechange]', document.readyState);
+  };
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('[DOMContentLoaded] 문서 파싱 완료');
+
+    const form = document.querySelector('form');
+    const submitBtn = document.querySelector('input[type="submit"].btn');
+
+    const deliveryDate = document.getElementById('delivery-date');     
+    const expMonthSelect = document.getElementById('expmonth-select');   
+    const colorPicker = document.getElementById('card-color');        
+    const colorPreview = document.getElementById('color-preview');
+
+    const zipInput = document.getElementById('zip');  
+    const ccNumInput = document.getElementById('ccnum'); 
+    const cvvInput = document.getElementById('cvv');  
+
+
+    if (deliveryDate) {
+      deliveryDate.addEventListener('change', () => {
+        if (deliveryDate.value) alert(`Delivery date set to: ${deliveryDate.value}`);
+      });
+    }
+
+    if (colorPicker && colorPreview) {
+      colorPicker.addEventListener('input', (e) => {
+        colorPreview.style.background = e.target.value;
+      });
+      colorPicker.addEventListener('change', (e) => {
+        colorPreview.style.background = e.target.value;
+        alert(`Card accent color: ${e.target.value}`);
+      });
+    }
+
+    if (expMonthSelect) {
+      expMonthSelect.addEventListener('change', () => {
+        if (expMonthSelect.value) alert(`Expiration month: ${expMonthSelect.value}`);
+      });
+    }
+
+    if (submitBtn && form) {
+      submitBtn.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        const ok = confirm('Proceed to checkout?');
+        if (ok) {
+          alert('Order submitted! (demo)');
+        } else {
+          alert('Checkout cancelled.');
+        }
+      });
+
+      submitBtn.addEventListener('mouseover', () => {
+        submitBtn.style.boxShadow = '0 6px 14px rgba(0,0,0,0.18)';
+        submitBtn.style.transform = 'translateY(-1px)';
+        showTooltip(submitBtn, 'Click to place your order');
+      });
+      submitBtn.addEventListener('mouseout', () => {
+        submitBtn.style.boxShadow = 'none';
+        submitBtn.style.transform = 'none';
+        hideTooltip(submitBtn);
+      });
+    }
+
+    function isControlKey(evt) {
+      const k = evt.key;
+      return (
+        k === 'Backspace' || k === 'Delete' || k === 'Tab' ||
+        k === 'ArrowLeft' || k === 'ArrowRight' || k === 'ArrowUp' || k === 'ArrowDown' ||
+        evt.ctrlKey || evt.metaKey
+      );
+    }
+    if (zipInput) {
+      zipInput.addEventListener('keydown', (evt) => {
+        if (isControlKey(evt)) return;
+        if (!/[0-9-]/.test(evt.key)) evt.preventDefault(); 
+      });
+    }
+    if (ccNumInput) {
+      ccNumInput.addEventListener('keydown', (evt) => {
+        if (isControlKey(evt)) return;
+        if (!/[0-9\- ]/.test(evt.key)) evt.preventDefault(); 
+      });
+    }
+    if (cvvInput) {
+      cvvInput.addEventListener('keydown', (evt) => {
+        if (isControlKey(evt)) return;
+        if (!/[0-9]/.test(evt.key)) evt.preventDefault(); 
+      });
+    }
+
+    const leftSide = document.querySelector('.leftSide');
+    if (leftSide) {
+      leftSide.addEventListener('mouseover', () => { leftSide.style.outline = '2px dashed #04AA6D'; });
+      leftSide.addEventListener('mouseout',  () => { leftSide.style.outline = 'none'; });
+    }
+
+
+    const summaryList  = document.getElementById('summary-list');
+    const summaryEmpty = document.getElementById('summary-empty');
+    const saveBtn      = document.getElementById('btn-save-summary');
+    const clearBtn     = document.getElementById('btn-clear-summary');
+    const fieldChecks  = Array.from(document.querySelectorAll('.info-field'));
+
+    function updateSummaryEmptyHint() {
+      summaryEmpty.style.display = summaryList.children.length ? 'none' : 'block';
+    }
+    function getLabel(id) {
+      const map = {
+        'fname':'Full Name','email':'Email','adr':'Address','city':'City',
+        'state':'State','zip':'Zip','delivery-date':'Delivery Date','paymethod':'Payment Method'
+      };
+      return map[id] || id;
+    }
+    function getPayMethod() {
+      const checked = document.querySelector('input[name="paymethod"]:checked');
+      return checked ? checked.value : '';
+    }
+    function buildSummaryText(selectedIds) {
+      const parts = [];
+      selectedIds.forEach(id => {
+        let val = '';
+        if (id === 'paymethod') val = getPayMethod();
+        else {
+          const el = document.getElementById(id);
+          val = el ? el.value.trim() : '';
+        }
+        if (val) parts.push(`${getLabel(id)}: ${val}`);
+      });
+      return parts.join(' | ');
+    }
+    function reindexBadges() {
+      Array.from(summaryList.children).forEach((li, idx) => {
+        const b = li.querySelector('.dyn-badge');
+        if (b) b.textContent = idx + 1;
+      });
+    }
+    function addSummaryItem() {
+      const selectedIds = fieldChecks.filter(c => c.checked).map(c => c.value);
+      if (!selectedIds.length) { alert('Select the field you want to save.'); return; }
+      const text = buildSummaryText(selectedIds);
+      if (!text) { alert('The selected field does not have a value.'); return; }
+
+      const li = document.createElement('li');
+      const badge = document.createElement('span');
+      badge.className = 'dyn-badge';
+      badge.textContent = summaryList.children.length + 1;
+      const content = document.createElement('span');
+      content.textContent = text;
+      const delBtn = document.createElement('button');
+      delBtn.type = 'button';
+      delBtn.textContent = '✕';
+      delBtn.style.marginLeft = 'auto';
+      delBtn.style.background = '#eee';
+      delBtn.style.border = '1px solid #ddd';
+      delBtn.style.borderRadius = '4px';
+      delBtn.style.cursor = 'pointer';
+      delBtn.onclick = () => { li.remove(); reindexBadges(); updateSummaryEmptyHint(); };
+
+      li.appendChild(badge);
+      li.appendChild(content);
+      li.appendChild(delBtn);
+      summaryList.appendChild(li);
+      updateSummaryEmptyHint();
+    }
+    function clearAllSummaries() {
+      if (!summaryList.children.length) { alert('There are no summary items to delete.'); return; }
+      if (confirm('you sure you want to delete all summary items?')) {
+        summaryList.innerHTML = '';
+        updateSummaryEmptyHint();
+      }
+    }
+    if (saveBtn)  saveBtn.addEventListener('click', addSummaryItem);
+    if (clearBtn) clearBtn.addEventListener('click', clearAllSummaries);
+    updateSummaryEmptyHint();
+  });
+</script>
+
+</body>
+</html>
