@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- jquery -->
+
+    <title>20250929</title>
+    <style>
+        /* div.example { 
+            font-size: 30px;
+            background-color: blueviolet;
+        }
+
+        @media only screen and (min-width: 476px) and (max-width: 700px) {
+            div.example {
+                font-size: 40px;
+                background-color: yellowgreen;
+            }
+        }
+
+        @media only screen and (min-width: 701px) {
+            div.example {
+                font-size: 50px;
+                background-color: yellow;
+            }
+        }
+        */
+
+        div.example1{
+            font-size: 30px;
+            background-color: blueviolet;
+        }
+        
+        div.example2{
+            font-size: 40px;
+            background-color: yellowgreen;
+        }
+        
+        div.example3{
+            font-size: 50px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="example">example</div>
+    <p>
+        475이하일 때 글씨 크기 30px / 배경색 보라색<br>
+        476부터 700까지 글씨 크기 40px / 배경색 초록색<br>
+        700초과일 때 글씨 크기 50px / 배경색 노란색
+    </p>
+
+    <script>
+        /*→ 지금 코드는 window.innerWidth를 한 번만 체크하기 때문에, 창 크기를 변경(resize) 하면 스타일이 업데이트되지 않음.
+        → $(window).resize() 이벤트를 추가해줘야 함.*/
+    function updateStyle() {
+        let width = window.innerWidth;
+
+        $(".example").removeClass("example1 example2 example3");
+
+        if(width > 700){
+            $(".example").addClass("example3");
+        } else if(width > 475){
+            $(".example").addClass("example2");
+        } else {
+            $(".example").addClass("example1");
+        }
+    }
+
+    updateStyle();
+
+    $(window).resize(function(){
+        updateStyle();
+    });
+
+    window.addEventListener("resize", function(){
+        // alert();
+    });
+
+    </script>
+    <style>
+        img{
+            max-width: 50%;
+            height: auto;
+        }
+        div.div_img{
+            height:200px;
+            background-size: cover;
+            /* background-size: 100% 100%; 
+            background-repeat: no-repeat;*/
+            background-image: url('https://www.ana.co.jp/japan-travel-planner/traditional-culture/8-must-visit-castles/images/spot7-001.jpg');
+        }
+    </style>
+    <img src="https://png.pngtree.com/thumb_back/fh260/background/20230718/pngtree-3d-render-of-the-ocean-and-sky-image_3909990.jpg">
+
+    <div class="div_img">
+
+
+
+
+
+    </div>
+</body>
+</html>
