@@ -1,0 +1,114 @@
+/* my.css */
+/* 공통 */
+:root {
+  --brand: #0d6efd;
+  --soft: #f8f9fa;
+}
+
+body {
+  background: #f2f4f7;
+}
+
+.brandLogo {
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+.pageWrapper {
+  max-width: 1100px;
+  margin: 24px auto 80px;
+  padding: 0 16px;
+}
+
+.card {
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
+}
+
+.table thead th {
+  white-space: nowrap;
+}
+
+.genreBadge {
+  font-size: .75rem;
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+/* mobile 버전 */
+@media (max-width: 576px) {
+  .pageWrapper {
+    margin: 12px auto 48px;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    display: block;
+    margin-bottom: 12px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    border-top: none !important;
+    padding: 6px 0;
+  }
+
+  .table td::before {
+    content: attr(data-col);
+    font-weight: 600;
+    color: #333;
+    margin-right: 8px;
+  }
+}
+
+/* dektop version */
+@media (min-width: 992px) {
+  .heroSection {
+    border-radius: 16px;
+    background: linear-gradient(135deg, #e9f2ff, #fff);
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+
+  .heroSection h1 {
+    font-size: 1.6rem;
+    margin: 0 0 8px;
+  }
+
+  .heroSection p {
+    margin: 0;
+    color: #495057;
+  }
+}
+/* 
+--------------정리-----------------
+
+my.css는 index.html, add.html, edit.html, view.html에 공통 적용되는 CSS 프레임 역할을 함
+
+공통 스타일
+- :root 변수(--brand, --soft) 정의
+- body, .brandLogo, .pageWrapper, .card 등 전체 페이지 레이아웃 및 공통 디자인 적용
+- .form-label { font-weight:600 }으로 입력폼 가독성 강화
+- .genreBadge { font-size:.75rem }으로 장르 태그 크지 조정
+
+반응형(RWD) 적용
+- media query (max-width:576px): mobile 전용
+   → 테이블 thead 숨김, 각 <tr>을 블록화
+   → td::before { content: attr(data-col); } 로 컬럼명 자동 표시
+- media query (min-width:992px): desktop[ 전용
+   → heroSection 영역에 배경 그라데이션, 여백, 큰 글씨 적용
+
+모든 페이지(index, add, edit, view)에 일관된 UI 프레임 제공
+
+모바일/데스크톱 환경에서 레이아웃이 자동으로 적응하도록 설계
+
+*/
