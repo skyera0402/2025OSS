@@ -40,7 +40,7 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- JS로 채움 -->
+
               </tbody>
             </table>
           </div>
@@ -116,7 +116,7 @@
   const btnRefresh = document.getElementById('btnRefresh');
   const btnSave = document.getElementById('btnSave');
 
-  // 1. READ: 목록 불러오기
+  // 1. READ part
   async function loadGames(){
     const res = await fetch(API_URL);
     const data = await res.json();
@@ -142,9 +142,9 @@
     });
   }
 
-  // 2. 행 클릭해서 수정 모드로 만들기
+  // 2. Modifying part
   gameTableBody.addEventListener('click', async (e) => {
-    // 제목 클릭 → 수정 모드
+    // title -> modifying
     if(e.target.matches('[data-id]')){
       const id = e.target.getAttribute('data-id');
       const res = await fetch(`${API_URL}/${id}`);
@@ -152,7 +152,7 @@
       fillForm(item);
     }
 
-    // 삭제 버튼
+    // delete botton
     if(e.target.matches('[data-del]')){
       const id = e.target.getAttribute('data-del');
       if(confirm('이 게임을 삭제할까요?')){
@@ -174,7 +174,7 @@
     gameGenre.value = item.genre;
   }
 
-  // 3. CREATE or UPDATE
+  // 3. CREATE || UPDATE
   gameForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -187,7 +187,7 @@
       genre: gameGenre.value.trim()
     };
 
-    // 간단 검증
+    // Cheking
     if(!payload.title || !payload.developer){
       alert('필수 항목을 입력하세요.');
       return;
@@ -214,7 +214,7 @@
     loadGames();
   });
 
-  // 4. 폼 리셋
+  // 4. RESET form
   function resetForm(){
     gameForm.reset();
     gameId.value = '';
@@ -224,7 +224,7 @@
   btnReset.addEventListener('click', resetForm);
   btnRefresh.addEventListener('click', loadGames);
 
-  // 초기 로드
+  // Initialization
   loadGames();
 </script>
 </body>
