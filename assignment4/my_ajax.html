@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>게임 AJAX CRUD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{ background:#f5f5f5; }
+    .wrap{ max-width:1100px; margin:24px auto; }
+    .pointer{ cursor:pointer; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+  <div class="container">
+    <a class="navbar-brand" href="#"> AJAX Game CRUD</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="row g-3">
+    <div class="col-lg-7">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="mb-3 d-flex justify-content-between align-items-center">
+            게임 목록
+            <button class="btn btn-sm btn-outline-secondary" id="btnRefresh">새로고침</button>
+          </h5>
+          <div class="table-responsive">
+            <table class="table table-sm align-middle" id="gameTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>제목</th>
+                  <th>가격</th>
+                  <th>년도</th>
+                  <th>액션</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- JS로 채움 -->
+              </tbody>
+            </table>
+          </div>
+          <small class="text-muted">행의 제목을 누르면 수정폼에 값이 채워집니다.</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-body">
+          <h5 id="formTitle">게임 추가</h5>
+          <form id="gameForm">
+            <input type="hidden" id="gameId">
+            <div class="mb-2">
+              <label class="form-label">게임 이름</label>
+              <input type="text" id="gameTitle" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">가격(₩)</label>
+              <input type="number" id="gamePrice" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">플레이 시간(시간)</label>
+              <input type="number" id="gamePlaytime" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">제작사</label>
+              <input type="text" id="gameDeveloper" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">출시년도</label>
+              <input type="number" id="gameYear" class="form-control" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">장르</label>
+              <input type="text" id="gameGenre" class="form-control" required>
+            </div>
+            <div class="d-flex gap-2 mt-3">
+              <button type="submit" class="btn btn-primary" id="btnSave">추가</button>
+              <button type="button" class="btn btn-outline-secondary" id="btnReset">취소</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-3">
+        <strong>설명</strong><br>
+        - 목록 불러오기: GET /games<br>
+        - 추가: POST /games<br>
+        - 수정: PUT /games/:id<br>
+        - 삭제: DELETE /games/:id
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  const API_URL = 'http://localhost:3001/games';
+
+  const gameTableBody = document.querySelector('#gameTable tbody');
+  const gameForm = document.getElementById('gameForm');
+  const formTitle = document.getElementById('formTitle');
+
+  const gameId = document.getElementById('gameId');
+  const gameTitle = document.getElementById('gameTitle');
+  const gamePrice = document.getElementById('gamePrice');
+  const gamePlaytime = document.getElementById('gamePlaytime');
+  const gameDeveloper = document.getElementById('gameDeveloper');
+  const gameYear = document.getElementById('gameYear');
+  const gameGenre = document.getElementById('gameGenre');
+
+  const btnReset = document.getElementById('btnReset');
+  const btnRefresh = document.getElementById('btnRefresh');
+  const btnSave = document.getElementById('btnSave');
+
+  // 1. READ: 목록 불러오기
+  async function loadGames(){
+    const res = await fetch(API_URL);
+    const data = await res.json();
+    renderTable(data);
+  }
+
+  function renderTable(list){
+    gameTableBody.innerHTML = '';
+    list.forEach(item => {
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td>${item.id}</td>
+        <td class="pointer text-primary fw-semibold" data-id="${item.id}">${item.title}</td>
+        <td>${item.price.toLocaleString()}원</td>
+        <td>${item.year}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-danger" data-del="${item.id}">삭제</button>
+        </td>
+      `;
+
+      gameTableBody.appendChild(tr);
+    });
+  }
+
+  // 2. 행 클릭해서 수정 모드로 만들기
+  gameTableBody.addEventListener('click', async (e) => {
+    // 제목 클릭 → 수정 모드
+    if(e.target.matches('[data-id]')){
+      const id = e.target.getAttribute('data-id');
+      const res = await fetch(`${API_URL}/${id}`);
+      const item = await res.json();
+      fillForm(item);
+    }
+
+    // 삭제 버튼
+    if(e.target.matches('[data-del]')){
+      const id = e.target.getAttribute('data-del');
+      if(confirm('이 게임을 삭제할까요?')){
+        await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+        loadGames();
+      }
+    }
+  });
+
+  function fillForm(item){
+    formTitle.textContent = '게임 수정';
+    btnSave.textContent = '수정';
+    gameId.value = item.id;
+    gameTitle.value = item.title;
+    gamePrice.value = item.price;
+    gamePlaytime.value = item.playtime;
+    gameDeveloper.value = item.developer;
+    gameYear.value = item.year;
+    gameGenre.value = item.genre;
+  }
+
+  // 3. CREATE or UPDATE
+  gameForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      title: gameTitle.value.trim(),
+      price: Number(gamePrice.value),
+      playtime: Number(gamePlaytime.value),
+      developer: gameDeveloper.value.trim(),
+      year: Number(gameYear.value),
+      genre: gameGenre.value.trim()
+    };
+
+    // 간단 검증
+    if(!payload.title || !payload.developer){
+      alert('필수 항목을 입력하세요.');
+      return;
+    }
+
+    const id = gameId.value;
+    if(id){ // UPDATE
+      await fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: Number(id), ...payload })
+      });
+      alert('수정되었습니다.');
+    } else { // CREATE
+      await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      alert('추가되었습니다.');
+    }
+
+    resetForm();
+    loadGames();
+  });
+
+  // 4. 폼 리셋
+  function resetForm(){
+    gameForm.reset();
+    gameId.value = '';
+    formTitle.textContent = '게임 추가';
+    btnSave.textContent = '추가';
+  }
+  btnReset.addEventListener('click', resetForm);
+  btnRefresh.addEventListener('click', loadGames);
+
+  // 초기 로드
+  loadGames();
+</script>
+</body>
+</html>
