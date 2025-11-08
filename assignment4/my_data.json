@@ -1,7 +1,7 @@
 {
   "games": [
     {
-      "id": 1,
+      "id": "6f3",
       "title": "Stellar Odyssey",
       "price": 29000,
       "playtime": 42,
@@ -10,7 +10,7 @@
       "genre": "RPG"
     },
     {
-      "id": 2,
+      "id": "77t",
       "title": "Rainbow Six Siege",
       "price": 22000,
       "playtime": 320,
@@ -19,7 +19,7 @@
       "genre": "FPS"
     },
     {
-      "id": 3,
+      "id": "98z7",
       "title": "Dead by Daylight",
       "price": 21000,
       "playtime": 145,
@@ -28,7 +28,7 @@
       "genre": "Horror"
     },
     {
-      "id": 4,
+      "id": "aa4",
       "title": "Eternal Return",
       "price": 0,
       "playtime": 88,
@@ -37,7 +37,7 @@
       "genre": "MOBA"
     },
     {
-      "id": 5,
+      "id": "3vf",
       "title": "City Architect",
       "price": 31000,
       "playtime": 66,
@@ -46,7 +46,7 @@
       "genre": "Sim"
     },
     {
-      "id": 6,
+      "id": "92g",
       "title": "Echoes of Winter",
       "price": 22000,
       "playtime": 9,
@@ -55,7 +55,7 @@
       "genre": "Adventure"
     },
     {
-      "id": 7,
+      "id": "nm6",
       "title": "Neon Racer X",
       "price": 19000,
       "playtime": 14,
@@ -64,7 +64,7 @@
       "genre": "Racing"
     },
     {
-      "id": 8,
+      "id": "48r",
       "title": "Castle Strategy",
       "price": 27000,
       "playtime": 53,
@@ -73,16 +73,16 @@
       "genre": "Strategy"
     },
     {
-      "id": 9,
+      "id": "9y7",
       "title": "Farm Valley",
       "price": 16000,
       "playtime": 88,
       "developer": "Sprout",
-      "year": 2018,
+      "year": 2,
       "genre": "Sim"
     },
     {
-      "id": 10,
+      "id": "090",
       "title": "Mystic Tactics",
       "price": 28000,
       "playtime": 34,
@@ -91,13 +91,13 @@
       "genre": "Strategy"
     },
     {
-      "id": 11,
-      "title": "honkai starrail",
+      "id": "dc7c",
+      "title": "Genshin-impart",
       "price": 0,
-      "playtime": 500,
-      "developer": "hoyoverse",
-      "year": 2023,
-      "genre": "servecultuer"
+      "playtime": 900,
+      "developer": "Hoyoverse",
+      "year": 2019,
+      "genre": "RPG"
     }
   ]
 }
