@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<style>
+    #div_click2{
+        background-color: pink;
+        width: 400px;
+    }
+</style>
+<body>
+    <!-- <div id="div_01">div 입니다.</div> -->
+
+    If you click on me, I will disappear.
+    <div id="div_click1">1. Click Me?</div>
+
+    <div id="div_click2">2. Click Me?</div>
+
+    <div id="div_click3">3. Click Me?</div>
+
+    <script>
+        /*let div_01 = document.getElementById("div_01");
+        alert(div_01.innerHTML);
+
+        let div_01_jquery = $("#div_01");
+        alert(div_01_jquery.html());
+        */
+        $(document).ready(function () {
+            $("#div_click1").click(function () {
+                $(this).hide();
+            });
+        
+            $("#div_click2").click(function () {
+                $(this).css("color", "red");
+            });
+
+            $("#div_click3").click(function () {
+                $("#div_click2").animate({ left: "250px" });
+            });
+        });
+
+    </script>
+
+</body>
+</html>
