@@ -4,12 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const myElement = React.createElement('h1', {}, 'I do not use JSX!');
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+
+//root.render(
+//  <React.StrictMode>
+//    <App />
+//  </React.StrictMode>
+//);
+
+root.render(myElement);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
