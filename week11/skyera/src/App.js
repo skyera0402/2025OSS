@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Garage from './Garage.js'
+import Garage from './Garage.js';
 
 function App() {
   return (
