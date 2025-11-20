@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import btn from './btn.js';
+import Color from 'Color.js'; 
 
 function App() {
   
