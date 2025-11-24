@@ -1,23 +1,15 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 
-export default function Timer() { 
-  console.log("Timer rendered!"); 
-  const [count, setCount] = useState(0); 
-  useEffect(() => { 
-    setTimeout(() => { 
-      setCount((count) => count + 1); 
-    }, 1000); 
-  }); 
-  return <h1> {count} times!</h1>; 
+export default function Time() {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setCount(c => c + 1);  
+        }, 1000);
+    
+        return () => clearTimeout(timer);
+    }, []);
+
+    return <h1>{count} times!</h1>;
 }
- Timer.js
-  useEffect(() => { 
-    setTimeout(() => { 
-      setCount((count) => count + 1); 
-    }, 1000); 
-  });
-  useEffect(() => { 
-    setTimeout(() => { 
-      setCount((count) => count + 1); 
-    }, 1000); 
-  },[]);
