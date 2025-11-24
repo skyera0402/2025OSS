@@ -1,15 +1,27 @@
 import { useState, useEffect } from "react";
 
 export default function Time() {
-    const [count, setCount] = useState(0);
+    const [seconds, setSeconds] = useState(0);     
+    const [updateCount, setUpdateCount] = useState(0); 
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setCount(c => c + 1);  
+        const timer = setInterval(() => {
+            setSeconds(prev => {
+                if (prev >= 59) {
+                    setUpdateCount(c => c + 1); 
+                    return 0;                   
+                }
+                return prev + 1;
+            });
         }, 1000);
-    
-        return () => clearTimeout(timer);
+
+        return () => clearInterval(timer);
     }, []);
 
-    return <h1>{count} times!</h1>;
+    return (
+        <div>
+            <h1>{seconds} 초</h1>
+            <h2>갱신 횟수: {updateCount} 회</h2>
+        </div>
+    );
 }
