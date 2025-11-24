@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Color from 'Color.js'; 
+import Time from 'Time.js'; 
 
 function App() {
   
@@ -10,7 +10,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         
         <p>
-          <Garage />
+          <Time />
         </p>
         
         <a
