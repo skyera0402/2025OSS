@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import Time from './Time.js'; 
+import CountEffect from './CountEffect';
+import RefTest from './RefTest';
 
 function App() {
   
@@ -11,6 +13,8 @@ function App() {
         
         <p>
           <Time />
+          <CountEffect/>
+          <RefTest/>
         </p>
         
         <a
